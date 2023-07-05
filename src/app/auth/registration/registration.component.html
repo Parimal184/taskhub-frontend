@@ -1,32 +1,70 @@
 <div class="container mt-5 mb-5">
     <div class="row d-flex align-items-center justify-content-center">
         <div class="col-md-6">
-            <div class="card px-5 py-5">
+            <div [formGroup]="registerForm" class="card px-5 py-5">
                 <span class="circle"><i class="fa fa-check"></i></span>
-                <h5 class="mt-3">Welcome to TaskHub!</h5><small>To get started, please create an account by filling out the registration form below.</small>
+                <h5 class="mt-3">Welcome to TaskHub!</h5><small>To get started, please create an account by filling out
+                    the registration form below.</small>
                 <div class="form-input">
                     <i class="fa fa-envelope"></i>
-                    <input type="text" class="form-control" placeholder="Email address">
+                    <input type="text" class="form-control" placeholder="Email address" formControlName="email"
+                        [ngClass]="{ 'is-invalid': formData['email'].invalid && (formData['email'].dirty || formData['email'].touched) }">
+                    <div *ngIf="formData['email'].errors?.['required'] && (formData['email'].dirty || formData['email'].touched)" class="invalid-feedback">
+                        Email is required!
+                    </div>
+                    <div *ngIf="formData['email'].errors?.['email'] && (formData['email'].dirty || formData['email'].touched)" class="invalid-feedback">
+                        Email is not valid!
+                    </div>
                 </div>
                 <div class="form-input">
                     <i class="fa fa-user"></i>
-                    <input type="text" class="form-control" placeholder="User name">
+                    <input type="text" class="form-control" placeholder="User name" formControlName="userName"
+                        [ngClass]="{ 'is-invalid': formData['userName'].invalid && (formData['userName'].dirty || formData['userName'].touched) }">
+                    <div *ngIf="formData['userName'].errors?.['required'] && (formData['userName'].dirty || formData['userName'].touched)"
+                        class="invalid-feedback">
+                        User name is required!
+                    </div>
+                    <div *ngIf="formData['userName'].errors?.['minlength'] && (formData['userName'].dirty || formData['userName'].touched)"
+                        class="invalid-feedback">
+                        User name should have at least 5 characters!
+                    </div>
                 </div>
                 <div class="form-input">
                     <i class="fa fa-user"></i>
-                    <input type="text" class="form-control" placeholder="First name">
+                    <input type="text" class="form-control" placeholder="First name" formControlName="firstName"
+                        [ngClass]="{ 'is-invalid': formData['firstName'].invalid && (formData['firstName'].dirty || formData['firstName'].touched) }">
+                    <div *ngIf="formData['firstName'].errors?.['required'] && (formData['firstName'].dirty || formData['firstName'].touched)"
+                        class="invalid-feedback">
+                        First name is required!
+                    </div>
                 </div>
                 <div class="form-input">
                     <i class="fa fa-user"></i>
-                    <input type="text" class="form-control" placeholder="Last name">
+                    <input type="text" class="form-control" placeholder="Last name" formControlName="lastName"
+                        [ngClass]="{ 'is-invalid': formData['lastName'].invalid && (formData['lastName'].dirty || formData['lastName'].touched) }">
+                    <div *ngIf="formData['lastName'].errors?.['required'] && (formData['lastName'].dirty || formData['lastName'].touched)"
+                        class="invalid-feedback">
+                        Last name is required!
+                    </div>
                 </div>
                 <div class="form-input">
                     <i class="fa fa-lock"></i>
-                    <input type="text" class="form-control" placeholder="Password">
+                    <input type="password" class="form-control" placeholder="Password" formControlName="password"
+                        [ngClass]="{ 'is-invalid': formData['password'].invalid && (formData['password'].dirty || formData['password'].touched) }">
+                    <div *ngIf="formData['password'].errors?.['required'] && (formData['password'].dirty || formData['password'].touched)"
+                        class="invalid-feedback">
+                        Password is required!
+                    </div>
                 </div>
                 <div class="form-input">
                     <i class="fa fa-lock"></i>
-                    <input type="text" class="form-control" placeholder="Confirm Password">
+                    <input type="password" class="form-control" placeholder="Confirm Password"
+                        formControlName="confirmPassword"
+                        [ngClass]="{ 'is-invalid': formData['confirmPassword'].invalid && (formData['confirmPassword'].dirty || formData['confirmPassword'].touched) }">
+                    <div *ngIf="formData['confirmPassword'].errors?.['required'] && (formData['confirmPassword'].dirty || formData['confirmPassword'].touched)"
+                        class="invalid-feedback">
+                        Confirm Password is required!
+                    </div>
                 </div>
                 <!-- <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
@@ -34,7 +72,7 @@
                         I agree all the statements
                     </label>
                 </div> -->
-                <button class="btn btn-primary mt-4 signup">REGISTER</button>
+                <button (click)="register()" class="btn btn-primary mt-4 signup" [disabled]="registerForm.invalid">REGISTER</button>
                 <!-- <div class="text-center mt-3">
                     <span>Or continue with these social profile</span>
                 </div>
