@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, AbstractControl, ValidatorFn } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-registration',
@@ -11,7 +13,7 @@ export class RegistrationComponent {
   registerForm!: FormGroup;
   isSubmitted: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private firebaseService: FirebaseService, private router: Router) { }
 
   ngOnInit() {
 
@@ -21,16 +23,35 @@ export class RegistrationComponent {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', [Validators.required, this.confirmPassword]]
+    }, {
+      validators : this.confirmPassword
     });
 
   }
 
+  confirmPassword(control: AbstractControl) {
+    const password = control.get('password');
+    const confPassword = control.get('confirmPassword');
+
+    if (password && confPassword && password.value !== confPassword.value) {
+      return { 'passwordMisMatch': true };
+    }
+
+    return null;
+  }
+
   register() {
-    console.log("jhgj")
+
     this.isSubmitted = true;
     if(this.registerForm.valid) {
       console.log("Submitted!!", this.registerForm.value);
+
+      this.firebaseService.addUser(this.registerForm.value).
+      then(() => {
+        console.log("Data saved success!!");
+        this.router.navigate(['login']);
+      })
     }
     
   }

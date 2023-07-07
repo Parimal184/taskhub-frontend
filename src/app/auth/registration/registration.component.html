@@ -60,10 +60,10 @@
                     <i class="fa fa-lock"></i>
                     <input type="password" class="form-control" placeholder="Confirm Password"
                         formControlName="confirmPassword"
-                        [ngClass]="{ 'is-invalid': formData['confirmPassword'].invalid && (formData['confirmPassword'].dirty || formData['confirmPassword'].touched) }">
-                    <div *ngIf="formData['confirmPassword'].errors?.['required'] && (formData['confirmPassword'].dirty || formData['confirmPassword'].touched)"
+                        [ngClass]="{ 'is-invalid': registerForm.hasError('passwordMisMatch') && (formData['confirmPassword'].dirty || formData['confirmPassword'].touched) }">
+                    <div *ngIf="registerForm.hasError('passwordMisMatch')"
                         class="invalid-feedback">
-                        Confirm Password is required!
+                        Password not match!
                     </div>
                 </div>
                 <!-- <div class="form-check">
