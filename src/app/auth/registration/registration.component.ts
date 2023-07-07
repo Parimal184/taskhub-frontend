@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, AbstractControl, ValidatorFn } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FirebaseService } from 'src/app/services/firebase.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -13,7 +13,7 @@ export class RegistrationComponent {
   registerForm!: FormGroup;
   isSubmitted: boolean = false;
 
-  constructor(private formBuilder: FormBuilder, private firebaseService: FirebaseService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private userSerice: UserService) { }
 
   ngOnInit() {
 
@@ -46,12 +46,12 @@ export class RegistrationComponent {
     this.isSubmitted = true;
     if(this.registerForm.valid) {
       console.log("Submitted!!", this.registerForm.value);
-
-      this.firebaseService.addUser(this.registerForm.value).
-      then(() => {
-        console.log("Data saved success!!");
-        this.router.navigate(['login']);
-      })
+      this.userSerice.saveUser(this.registerForm.value).
+        subscribe({
+          next: (response) => {
+            this.router.navigate(['/login']);
+          }
+        })
     }
     
   }
