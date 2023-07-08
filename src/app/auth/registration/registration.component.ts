@@ -30,6 +30,10 @@ export class RegistrationComponent {
 
   }
 
+  getData() {
+    console.log("kjhsdgchjgsdh")
+  }
+
   confirmPassword(control: AbstractControl) {
     const password = control.get('password');
     const confPassword = control.get('confirmPassword');
@@ -42,16 +46,18 @@ export class RegistrationComponent {
   }
 
   register() {
-
     this.isSubmitted = true;
     if(this.registerForm.valid) {
-      console.log("Submitted!!", this.registerForm.value);
-      this.userSerice.saveUser(this.registerForm.value).
-        subscribe({
-          next: (response) => {
-            this.router.navigate(['/login']);
-          }
-        })
+      console.log("Submitted!!", JSON.stringify(this.registerForm.value));
+      localStorage.setItem("user", JSON.stringify(this.registerForm.value))
+      JSON.parse(localStorage.getItem('user')!);
+      // this.userSerice.saveUser(this.registerForm.value).
+      //   subscribe({
+      //     next: (response) => {
+      //       localStorage.setItem("user", response)
+      //       this.router.navigate(['/login']);
+      //     }
+      //   })
     }
     
   }

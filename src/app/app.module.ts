@@ -8,13 +8,15 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './component/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent
-  ],
+    RegistrationComponent,
+    HomeComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
