@@ -14,4 +14,13 @@ export class UserService {
   saveUser(userDetails: UserDetails): Observable<any> {
     return this.httpService.post(Constants.REGISTER_URL, userDetails);
   }
+
+  login(userDetails: UserDetails) {
+    let user = {
+      "username": userDetails.userName,
+      "password": userDetails.password
+    }
+    return this.httpService.post(Constants.LOGIN_URL, user)
+  }
+
 }

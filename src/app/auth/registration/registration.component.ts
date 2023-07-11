@@ -51,13 +51,12 @@ export class RegistrationComponent {
       console.log("Submitted!!", JSON.stringify(this.registerForm.value));
       localStorage.setItem("user", JSON.stringify(this.registerForm.value))
       JSON.parse(localStorage.getItem('user')!);
-      // this.userSerice.saveUser(this.registerForm.value).
-      //   subscribe({
-      //     next: (response) => {
-      //       localStorage.setItem("user", response)
-      //       this.router.navigate(['/login']);
-      //     }
-      //   })
+      this.userSerice.saveUser(this.registerForm.value).
+        subscribe({
+          next: (response) => {
+            this.router.navigate(['/login']);
+          }
+        })
     }
     
   }
