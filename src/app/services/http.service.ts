@@ -8,6 +8,7 @@ const httpOptions = {
   })
 };
 
+
 const httpOptionsFullBody = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -24,6 +25,10 @@ export class HttpService {
 
   post(endpoint: string, requestBody: any): Observable<any> {
     return this.http.post(endpoint, requestBody, httpOptions);
+  }
+
+  postBody(endPoint: string, requestPayload: any): Observable<any> {
+    return this.http.post(endPoint, requestPayload, httpOptionsFullBody);
   }
 
   get(endpoint: string): Observable<any> {

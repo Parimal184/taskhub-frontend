@@ -22,7 +22,7 @@
                         Password is required!
                     </div>
                 </div>
-                <button class="btn btn-primary mt-4 signup" (click)="login()" [disabled]="loginForm.invalid">LOGIN</button>
+                <button class="btn btn-primary mt-4 signup" (click)="onLogin()" [disabled]="loginForm.invalid">LOGIN</button>
                 <div class="text-center mt-4">
                     <span>New to TaskHub?</span>
                     <a routerLink="/signup" class="text-decoration-none">Register</a>

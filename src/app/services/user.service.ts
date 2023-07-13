@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Constants } from '../modal/constants';
 import { UserDetails } from '../modal/user-details';
 
@@ -9,7 +9,11 @@ import { UserDetails } from '../modal/user-details';
 })
 export class UserService {
 
-  constructor(private httpService: HttpService) { }
+  public loginUser: BehaviorSubject<UserDetails>;
+
+  constructor(private httpService: HttpService) {
+    this.loginUser = new BehaviorSubject<UserDetails>(JSON.parse(window.localStorage.getItem('user') || '{}'));
+  }
 
   saveUser(userDetails: UserDetails): Observable<any> {
     return this.httpService.post(Constants.REGISTER_URL, userDetails);
@@ -20,7 +24,20 @@ export class UserService {
       "username": userDetails.userName,
       "password": userDetails.password
     }
-    return this.httpService.post(Constants.LOGIN_URL, user)
+    return this.httpService.postBody(Constants.LOGIN_URL, user)
+  }
+
+  setLoginUser(user: UserDetails) {
+    this.loginUser.next(user);
+  }
+
+  getLoginUser() {
+    return this.loginUser.value;
+  }
+
+  getUser() {
+    let loginUser = JSON.parse(localStorage.getItem('user')!) || "{}";
+    return loginUser;
   }
 
 }

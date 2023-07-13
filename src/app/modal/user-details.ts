@@ -4,5 +4,5 @@ export class UserDetails {
     firstName!: string;
     latName!: string;
     password!: string;
-    isAuthenticated: boolean = false;
+    token!: string;
 }

@@ -45,7 +45,7 @@ export class RegistrationComponent {
     return null;
   }
 
-  register() {
+  onSignup() {
     this.isSubmitted = true;
     if(this.registerForm.valid) {
       console.log("Submitted!!", JSON.stringify(this.registerForm.value));
