@@ -1,1 +1,35 @@
-<p>home works!</p>
+<div class="container">
+    <div class="main-content">
+        <div class="dashboard">
+            <h2>Dashboard Overview</h2>
+            <div class="task-summary">
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 60%;"></div>
+                </div>
+                <div class="task-details">
+                    <p class="task-completion">Tasks Completed: 60%</p>
+                    <p class="task-count">Total Tasks: 100</p>
+                </div>
+                <div class="task-actions">
+                    <button routerLink="task/add">New Task</button>
+                </div>
+            </div>
+            <div class="task-cards">
+                <div class="task-card">
+                    <div class="task-header">
+                        <p>#1</p>
+                        <a> {{taskData.title}} </a>
+                        <span><label class="task-priority">{{taskData.priority}}</label></span>
+                    </div>
+                    <div class="task-metadata">
+                        <div><span>Created on </span><label> {{ taskData.created }}</label> <span> by
+                                {{taskData.creator}}</span></div>
+                        <div><span>Assigned to : </span><label> {{ taskData.assignee }}</label></div>
+                    </div>
+
+                </div>
+                <!-- More task cards -->
+            </div>
+        </div>
+    </div>
+</div>

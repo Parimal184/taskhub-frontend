@@ -1,0 +1,103 @@
+.card {
+    width: 100%;
+    border: 1px solid #e1e4e8;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.open {
+    background-color: #28a745;
+}
+
+.closed {
+    background-color: #cb2431;
+}
+
+.details p {
+    margin: 5px 0;
+}
+
+h3 {
+    margin: 0;
+}
+
+// Add task form CSS
+
+/* Previous CSS styles */
+
+.form-container {
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d8e0e5;
+    border-radius: 5px;
+    background-color: transparent;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #0d6efd !important;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.form-actions button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.material-icons {
+    font-size: 24px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+/* Add media queries for responsive design */

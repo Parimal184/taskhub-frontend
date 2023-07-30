@@ -2,9 +2,14 @@
 
 
 body {
-    background-color: #000;
     font-family: "Poppins", sans-serif;
     font-weight: 300;
+}
+
+.container {
+    float: left;
+    padding: 0%;
+    max-width: 100% !important;
 }
 
 .height {
@@ -110,4 +115,105 @@ body {
 
 .component-black {
     background-color: black;
+}
+
+h1,
+h2,
+h3 {
+    color: #495057;
+}
+
+a {
+    cursor: pointer;
+}
+
+.main-content {
+    color: #575e64;
+    margin-left: 200px;
+    padding: 20px;
+}
+
+.dashboard {
+    margin-bottom: 30px;
+}
+
+.task-summary {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.task-progress {
+    width: 70%;
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+}
+
+.task-details {
+    margin-left: 10px;
+}
+
+.task-details h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.task-details p {
+    margin: 5px 0;
+}
+
+.task-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.task-card h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.task-card p {
+    margin: 5px 0;
+}
+
+.task-priority {
+    background-color: #d73a4a;
+    display: inline-block;
+    padding: 0 10px;
+    font-size: 12px;
+    font-weight: var(--base-text-weight-medium, 500);
+    line-height: 22px !important;
+    border: 1px solid transparent;
+    border-radius: 2em;
+    color: white;
+}
+
+.task-metadata {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+button:hover {
+    background-color: #0a58ca;
 }
