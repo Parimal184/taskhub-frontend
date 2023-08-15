@@ -5,5 +5,6 @@ const MAIN_URL = environment.ROOT_URL + environment.API_URL;
 export const Constants = {
 
     REGISTER_URL: MAIN_URL + "/register",
-    LOGIN_URL: MAIN_URL + "/login"
+    LOGIN_URL: MAIN_URL + "/login",
+    TASK_SAVE: MAIN_URL + "/task/save",
 }

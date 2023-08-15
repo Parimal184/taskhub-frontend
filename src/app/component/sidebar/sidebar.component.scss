@@ -7,6 +7,8 @@
     float: left;
     position: fixed;
     box-shadow: 5px 0 5px rgba(0, 0, 0, 0.1);
+    background-color: black;
+    color: #dddddd;
 }
 
 .sidebar ul {
@@ -20,12 +22,9 @@
     cursor: pointer;
 }
 
-.sidebar li:hover {
+.sidebar li.active, li:hover {
     background-color: #ddd;
-}
-
-.sidebar li.active {
-    background-color: #ddd;
+    color: grey;
 }
 
 .logo {

@@ -20,7 +20,7 @@ export class LoginComponent {
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-    this.router.navigateByUrl("/home")
+    this.router.navigateByUrl("")
     this.loginForm = this.formBuilder.group({
       userName: ['', [Validators.required]],
       password: ['', Validators.required]
@@ -40,7 +40,7 @@ export class LoginComponent {
             this.userDetails.token = response.headers.get('Jwt-Token');
             localStorage.setItem('user', JSON.stringify(this.userDetails));
             this.userService.setLoginUser(this.userDetails);
-            this.router.navigateByUrl('/home');
+            this.router.navigateByUrl('');
           }
         })
     }
