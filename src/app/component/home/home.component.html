@@ -15,14 +15,14 @@
                 </div>
             </div>
             <div class="task-cards">
-                <div class="task-card">
+                <div class="task-card" *ngFor="let task of taskService.cachedData$ | async">
                     <div class="task-header">
-                        <p>#1</p>
-                        <a> {{taskData.title}} </a>
-                        <span><label class="task-priority">{{taskData.priority}}</label></span>
+                        <p>Task: {{task.id}}</p>
+                        <a [routerLink]="['task/edit/',task.id]"> {{task.title}} </a>
+                        <span><label [ngClass]="getPriorityClass(task)">{{task.priority}}</label></span>
                     </div>
                     <div class="task-metadata">
-                        <div><span>Created on </span><label> {{ taskData.created }}</label></div>
+                        <div><span>Created on </span><label><b> {{ task.created | date: 'MMM d, y hh:mm a zzz' }}</b></label></div>
                     </div>
 
                 </div>

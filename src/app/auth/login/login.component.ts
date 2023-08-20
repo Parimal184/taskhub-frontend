@@ -14,13 +14,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoginComponent {
 
-  loginForm!: FormGroup;
+  loginForm: FormGroup = new FormGroup("");
   userDetails!: UserDetails;
+  errorMessage!: string;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
-    this.router.navigateByUrl("")
     this.loginForm = this.formBuilder.group({
       userName: ['', [Validators.required]],
       password: ['', Validators.required]
@@ -41,6 +41,11 @@ export class LoginComponent {
             localStorage.setItem('user', JSON.stringify(this.userDetails));
             this.userService.setLoginUser(this.userDetails);
             this.router.navigateByUrl('');
+          },
+          error: (error) => {
+            if (error.status === 401) {
+              this.errorMessage = error.error.message;
+            }
           }
         })
     }

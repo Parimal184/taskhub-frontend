@@ -13,6 +13,7 @@ import { AuthInterceptor } from './auth-intercepter';
 import { TaskComponent } from './component/task/task.component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
+import { ModalComponent } from './component/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { SidebarComponent } from './component/sidebar/sidebar.component';
     RegistrationComponent,
     HomeComponent,
     TaskComponent,
-    SidebarComponent
+    SidebarComponent,
+    ModalComponent
     ],
   imports: [
     BrowserModule,

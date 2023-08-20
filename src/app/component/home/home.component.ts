@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { TaskData } from 'src/app/modal/taskData';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-home',
@@ -9,15 +10,25 @@ import { TaskData } from 'src/app/modal/taskData';
 })
 export class HomeComponent {
   taskData = new TaskData();
+  tasks!: TaskData[];
   
-  constructor(private datePipe: DatePipe) {}
+  constructor(public taskService: TaskService) {}
 
   ngOnInit() {
-    const now = new Date();
-    this.taskData.title = "Demo";
-    this.taskData.description = "This is my first task !";
-    this.taskData.created = this.datePipe.transform(now, 'MMM d, y \'at\' hh:mm a')!;
-    this.taskData.priority = "In Priority";
-    this.taskData.dueDate = new Date().toString();
+    this.getAllTasks();
+  }
+
+  getAllTasks() {
+    this.taskService.getAllTasks()
+  }
+
+  getPriorityClass(currentTask: TaskData): string {
+    if(currentTask.priority === "HIGH") {
+      return "high";
+    } else if(currentTask.priority === "LOW") {
+      return "low";
+    } else {
+      return "medium";
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const httpOptions = {
@@ -33,6 +33,14 @@ export class HttpService {
 
   get(endpoint: string): Observable<any> {
     return this.http.get(endpoint);
+  }
+
+  getWithParam(endpoint: string, id: number): Observable<any> {
+    const params = new HttpParams().set('id', id.toString());
+    const options = {
+      params: params
+    };
+    return this.http.get(endpoint, options);
   }
 
 }

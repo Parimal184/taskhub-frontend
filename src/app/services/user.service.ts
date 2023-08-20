@@ -35,6 +35,10 @@ export class UserService {
     return this.loginUser.value;
   }
 
+  removeLoginUser() {
+    localStorage.removeItem("user");
+  }
+
   getUser() {
     let loginUser = JSON.parse(localStorage.getItem('user')!) || "{}";
     return loginUser;
