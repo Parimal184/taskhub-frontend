@@ -43,4 +43,12 @@ export class HttpService {
     return this.http.get(endpoint, options);
   }
 
+  delete(endpoint: string, id: number): Observable<any> {
+    const params = new HttpParams().set('id', id.toString());
+    const options = {
+      params: params
+    };
+    return this.http.delete(endpoint, options);
+  }
+
 }

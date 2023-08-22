@@ -20,11 +20,22 @@ export class TaskService {
   }
 
   getAllTasks() {
-    if (this.cachedDataSubject.value.length === 0) {
-      this.httpService.get(Constants.ALL_TASKS).subscribe(data => {
-        this.cachedDataSubject.next(data.tasks);
-      });
-    }
+    this.httpService.get(Constants.ALL_TASKS + "/all").subscribe(data => {
+      this.cachedDataSubject.next(data.tasks);
+    });
+  }
+
+  getTasksByStatus(status: string) {
+    this.httpService.get(Constants.ALL_TASKS + "/" + status).subscribe(data => {
+      this.cachedDataSubject.next(data.tasks);
+    });
+  }
+
+  deleteTask(taskId: number) {
+    this.httpService.delete(Constants.DELETE_TASK, taskId).subscribe(() => {
+      this.resetCachedData();
+      this.getAllTasks();
+    });
   }
 
   getTask(taskId: number): Observable<any> {

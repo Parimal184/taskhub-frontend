@@ -27,14 +27,17 @@
 
             <div class="form-group">
                 <label for="status">Status:</label>
-                <select id="status" name="status" formControlName="status">
+                <select id="status" name="status" formControlName="status" [disabled]="true">
                     <option *ngFor="let option of statusOptions" [value]="option.value">{{ option.label }}</option>
                 </select>
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary mt-4" (click)="saveTask()" [disabled]="taskForm.invalid">Save Task</button>
-                <button type="reset" class="btn btn-primary mt-4" [disabled]="taskForm.invalid">Clear</button>
+                <button type="submit" class="btn btn-primary mt-4" (click)="saveTask()"
+                    [disabled]="taskForm.invalid">Save Task</button>
+                <button type="reset" class="btn btn-primary mt-4">Clear</button>
+                <button type="reset" class="btn btn-primary mt-4" routerLink="/">Cancel</button>
+                <button type="reset" class="btn btn-danger mt-4" (click)="deleteTask()">Delete</button>
             </div>
         </form>
     </div>

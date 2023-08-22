@@ -8,10 +8,10 @@
                 </a>
             </div>
             <ul>
-                <li routerLink="/" class="active">Tasks</li>
-                <li>To Do</li>
-                <li>In Progress</li>
-                <li>Completed</li>
+                <li [routerLink]="['tasks/', '']" routerLinkActive="active">Tasks</li>
+                <li [routerLink]="['tasks/','todo']" routerLinkActive="active">To Do</li>
+                <li [routerLink]="['tasks/','in-progress']" routerLinkActive="active">In Progress</li>
+                <li [routerLink]="['tasks/','completed']" routerLinkActive="active">Completed</li>
             </ul>
         </div>
     </div>

@@ -7,6 +7,7 @@ export const Constants = {
     REGISTER_URL: MAIN_URL + "/register",
     LOGIN_URL: MAIN_URL + "/login",
     TASK_SAVE: MAIN_URL + "/task/save",
-    ALL_TASKS: MAIN_URL + "/task/all",
-    GET_TASK: MAIN_URL + "/task"
+    ALL_TASKS: MAIN_URL + "/tasks",
+    GET_TASK: MAIN_URL + "/task",
+    DELETE_TASK: MAIN_URL + "/delete"
 }

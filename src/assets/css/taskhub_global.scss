@@ -113,10 +113,6 @@ body {
     /* Firefox */
 }
 
-.component-black {
-    background-color: black;
-}
-
 h1,
 h2,
 h3 {
@@ -186,6 +182,7 @@ a {
 
 .task-card p {
     margin: 5px 0;
+    font-size: small;
 }
 
 .task-cards {
@@ -193,7 +190,7 @@ a {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    align-items: center;
+    align-items: stretch;
     align-content: space-around;
 }
 
@@ -215,7 +212,7 @@ a {
 
 .medium {
     @extend .task-priority;
-    background-color: #fb9404 ;
+    background-color: #fb9404;
     color: white;
 }
 
@@ -238,6 +235,17 @@ a {
     color: inherit;
 }
 
+.task-header button {
+    float: right;
+    background-color: transparent;
+    color: #d73a4a;
+}
+
+.task-header button:hover {
+    color: black;
+    background-color: transparent;
+}
+
 button {
     padding: 5px 10px;
     background-color: #0d6efd;
@@ -250,6 +258,7 @@ button {
 button:hover {
     background-color: #0a58ca;
 }
+
 .error-message {
     width: 100%;
     margin-top: 0.25rem;

@@ -28,7 +28,7 @@ export class AuthInterceptor implements HttpInterceptor {
         } else {
             return next.handle(request).pipe(
                 catchError((error: HttpErrorResponse) => {
-                    if (error.status === 401) {
+                    if (error.status === 401 && error.message.includes("Session expired")) {
                         this.router.navigate(['/login']);
                         this.modalService.openErrorModal('Session expired! Please relogin.');
                         this.userService.removeLoginUser();

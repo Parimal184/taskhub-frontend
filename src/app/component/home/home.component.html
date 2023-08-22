@@ -1,7 +1,6 @@
 <div class="container">
     <div class="main-content">
         <div class="dashboard">
-            <h2>Dashboard Overview</h2>
             <div class="task-summary">
                 <div class="progress-bar-container">
                     <div class="progress-bar" style="width: 60%;"></div>
@@ -11,18 +10,22 @@
                     <p class="task-count">Total Tasks: 100</p>
                 </div>
                 <div class="task-actions">
-                    <button routerLink="task/add">New Task</button>
+                    <button [routerLink]="['/task/add']">New Task</button>
                 </div>
             </div>
             <div class="task-cards">
                 <div class="task-card" *ngFor="let task of taskService.cachedData$ | async">
                     <div class="task-header">
+                        <button (click)="deleteTask(task.id)">
+                            <i class="fa fa-trash"></i>
+                        </button>
                         <p>Task: {{task.id}}</p>
-                        <a [routerLink]="['task/edit/',task.id]"> {{task.title}} </a>
+                        <a [routerLink]="['/task/edit/',task.id]"> {{task.title}} </a>
                         <span><label [ngClass]="getPriorityClass(task)">{{task.priority}}</label></span>
                     </div>
                     <div class="task-metadata">
-                        <div><span>Created on </span><label><b> {{ task.created | date: 'MMM d, y hh:mm a zzz' }}</b></label></div>
+                        <div><span>Created on </span><label><b> {{ task.created | date: 'MMM d, y hh:mm a zzz'
+                                    }}</b></label></div>
                     </div>
 
                 </div>

@@ -13,7 +13,9 @@ const routes: Routes = [
   {
     path: '', component: SidebarComponent,
     children: [
-      { path: '', component: HomeComponent },
+      { path: '', redirectTo: 'tasks/', pathMatch: 'full' },
+      { path: 'tasks', redirectTo: 'tasks/', pathMatch: 'full' },
+      { path: 'tasks/:status', component: HomeComponent },
       { path: 'task/add', component: TaskComponent },
       { path: 'task/edit/:id', component: TaskComponent },
       { path: 'task/delete/:id', component: TaskComponent }

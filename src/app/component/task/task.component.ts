@@ -21,46 +21,47 @@ export class TaskComponent {
   currentTask!: TaskData;
 
   statusOptions = [
-    {label: "TODO", value: "TODO"},
-    {label: "In Progress", value: "In Progress"},
-    {label: "Completed", value: "Completed"}
+    { label: "TODO", value: "TODO" },
+    { label: "In Progress", value: "IN_PROGRESS" },
+    { label: "Completed", value: "COMPLETED" }
   ]
 
   priorityOptions = [
-    {label: "High", value: "HIGH"},
-    {label: "Medium", value: "MEDIUM"},
-    {label: "Low", value: "LOW"}
+    { label: "High", value: "HIGH" },
+    { label: "Medium", value: "MEDIUM" },
+    { label: "Low", value: "LOW" }
   ]
 
-  constructor(private route: ActivatedRoute,private fb: FormBuilder, private taskService: TaskService, private userService: UserService, private router: Router) { 
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private taskService: TaskService, private userService: UserService, private router: Router) {
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       priority: [this.priorityOptions[0].value, Validators.required],
       dueDate: ['', Validators.required],
-      status: [this.statusOptions[0].value, Validators.required]
+      status: [{ value: this.statusOptions[0].value, disabled: true }, Validators.required]
     });
   }
 
   ngOnInit() {
 
+    this.loginUser = this.userService.getLoginUser();
     this.taskId = this.route.snapshot.params['id'];
-    if(this.taskId) {
+    console.log("task id :", this.taskId)
+    if (this.taskId) {
       this.taskService.getTask(this.taskId).
-      pipe(first())
-      .subscribe(data => {
-        console.log("task :::", data);
-        this.currentTask = data;
-        this.loginUser = this.userService.getLoginUser();
-    
-        this.taskForm = this.fb.group({
-          title: [this.currentTask?.title ? this.currentTask.title : 'Demo', Validators.required],
-          description: [this.currentTask?.description ? this.currentTask.description : '', Validators.required],
-          priority: [this.currentTask?.priority ? this.currentTask.priority : this.priorityOptions[0].value, Validators.required],
-          dueDate: [this.currentTask?.dueDate ? this.currentTask.dueDate : '', Validators.required],
-          status: [this.currentTask?.status ? this.currentTask.status : this.statusOptions[0].value, Validators.required]
+        pipe(first())
+        .subscribe(data => {
+          console.log("task :::", data);
+          this.currentTask = data;
+
+          this.taskForm = this.fb.group({
+            title: [this.currentTask?.title ? this.currentTask.title : 'Demo', Validators.required],
+            description: [this.currentTask?.description ? this.currentTask.description : '', Validators.required],
+            priority: [this.currentTask?.priority ? this.currentTask.priority : this.priorityOptions[0].value, Validators.required],
+            dueDate: [this.currentTask?.dueDate ? new Date(this.currentTask.dueDate).toISOString().substring(0, 10) : '', Validators.required],
+            status: [this.currentTask?.status ? this.currentTask.status : this.statusOptions[0].value, Validators.required]
+          });
         });
-      });
     }
 
   }
@@ -68,20 +69,28 @@ export class TaskComponent {
   saveTask() {
     console.log("taskData :", this.taskData)
     const task: TaskData = this.taskData;
+    task.id = this.taskId;
+    if (task.status) {
+      task.status = task.status.toUpperCase();
+    }
     task.priority = task.priority.toUpperCase();
-    task.status = task.status.toUpperCase();
     task.creatorEmail = this.loginUser.email;
-    this.taskService.saveTask(this.taskData)
-    .pipe(first())
-    .subscribe({
-      next: (response) => {
-        this.taskService.resetCachedData();
-        this.router.navigate(['/']);
-      },
-      error: (error) => {
-        console.log("error :", error);
-      }
-    });
+    this.taskService.saveTask(task)
+      .pipe(first())
+      .subscribe({
+        next: (response) => {
+          this.taskService.resetCachedData();
+          this.router.navigate(['/']);
+        },
+        error: (error) => {
+          console.log("error :", error);
+        }
+      });
+  }
+
+  deleteTask() {
+    this.taskService.deleteTask(this.currentTask.id);
+    this.router.navigate(["/"]);
   }
 
   get taskData() { return this.taskForm.value }
