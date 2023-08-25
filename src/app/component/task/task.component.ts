@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { first } from 'rxjs';
 import { TaskData } from 'src/app/modal/taskData';
 import { UserDetails } from 'src/app/modal/user-details';
@@ -13,11 +14,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
-  @Input() task!: any;
+  @Input() taskId!: number;
 
   taskForm!: FormGroup;
   loginUser!: UserDetails;
-  taskId!: number;
   currentTask!: TaskData;
 
   statusOptions = [
@@ -32,20 +32,25 @@ export class TaskComponent {
     { label: "Low", value: "LOW" }
   ]
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder, private taskService: TaskService, private userService: UserService, private router: Router) {
+  constructor(public activeModal: NgbActiveModal, private route: ActivatedRoute, private fb: FormBuilder, private taskService: TaskService, private userService: UserService, private router: Router) {
     this.taskForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       priority: [this.priorityOptions[0].value, Validators.required],
-      dueDate: ['', Validators.required],
+      dueDate: ['', [Validators.required, this.dateValidation]],
       status: [{ value: this.statusOptions[0].value, disabled: true }, Validators.required]
+    }, {
+      validators: this.dateValidation
     });
+  }
+
+  closeTaskModal() {
+    this.activeModal.dismiss();
   }
 
   ngOnInit() {
 
     this.loginUser = this.userService.getLoginUser();
-    this.taskId = this.route.snapshot.params['id'];
     console.log("task id :", this.taskId)
     if (this.taskId) {
       this.taskService.getTask(this.taskId).
@@ -63,13 +68,22 @@ export class TaskComponent {
           });
         });
     }
+  }
 
+  dateValidation(controls: AbstractControl) {
+    const dueDate: Date = new Date(controls.get('dueDate')?.value);
+    if (dueDate < new Date()) {
+      return { 'dateIsBeforeToday': true }
+    }
+    return null;
   }
 
   saveTask() {
     console.log("taskData :", this.taskData)
     const task: TaskData = this.taskData;
-    task.id = this.taskId;
+    if (this.taskId != 0) {
+      task.id = this.taskId;
+    }
     if (task.status) {
       task.status = task.status.toUpperCase();
     }
@@ -79,8 +93,7 @@ export class TaskComponent {
       .pipe(first())
       .subscribe({
         next: (response) => {
-          this.taskService.resetCachedData();
-          this.router.navigate(['/']);
+          this.taskService.getAllTasks();
         },
         error: (error) => {
           console.log("error :", error);

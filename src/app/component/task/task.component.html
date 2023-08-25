@@ -1,45 +1,106 @@
-<div class="main-content">
-    <!-- Add task Form start -->
+<!-- <div class="main-content">
+    <div class="task-container">
+        <div class="form-container">
+            <form id="taskForm" [formGroup]="taskForm">
+                <div class="form-group">
+                    <label for="title">Task Title:</label>
+                    <input type="text" id="title" name="title" formControlName="title">
+                </div>
 
-    <div class="form-container">
-        <form id="taskForm" [formGroup]="taskForm">
-            <div class="form-group">
-                <label for="title">Task Title:</label>
-                <input type="text" id="title" name="title" formControlName="title">
-            </div>
+                <div class="form-group">
+                    <label for="description">Task Description:</label>
+                    <textarea id="description" name="description" formControlName="description"></textarea>
+                </div>
 
-            <div class="form-group">
-                <label for="description">Task Description:</label>
-                <textarea id="description" name="description" formControlName="description"></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="dueDate">Due Date:</label>
+                    <input type="date" id="dueDate" name="dueDate" formControlName="dueDate">
+                    <div *ngIf="taskForm.hasError('dateIsBeforeToday')" class="error-message">
+                        Please select the Date after Today!
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label for="dueDate">Due Date:</label>
-                <input type="date" id="dueDate" name="dueDate" formControlName="dueDate">
-            </div>
+                <div class="form-group">
+                    <label for="priority">Priority:</label>
+                    <select id="priority" name="priority" formControlName="priority">
+                        <option *ngFor="let option of priorityOptions" [value]="option.value">{{ option.label }}
+                        </option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="priority">Priority:</label>
-                <select id="priority" name="priority" formControlName="priority">
-                    <option *ngFor="let option of priorityOptions" [value]="option.value">{{ option.label }}</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="status">Status:</label>
+                    <select id="status" name="status" formControlName="status" [disabled]="true">
+                        <option *ngFor="let option of statusOptions" [value]="option.value">{{ option.label }}</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="status">Status:</label>
-                <select id="status" name="status" formControlName="status" [disabled]="true">
-                    <option *ngFor="let option of statusOptions" [value]="option.value">{{ option.label }}</option>
-                </select>
-            </div>
-
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary mt-4" (click)="saveTask()"
-                    [disabled]="taskForm.invalid">Save Task</button>
-                <button type="reset" class="btn btn-primary mt-4">Clear</button>
-                <button type="reset" class="btn btn-primary mt-4" routerLink="/">Cancel</button>
-                <button type="reset" class="btn btn-danger mt-4" (click)="deleteTask()">Delete</button>
-            </div>
-        </form>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary mt-4" (click)="saveTask()"
+                        [disabled]="taskForm.invalid">Save Task</button>
+                    <button type="reset" class="btn btn-primary mt-4">Clear</button>
+                    <button type="reset" class="btn btn-primary mt-4" routerLink="/">Cancel</button>
+                    <button *ngIf="taskId" type="reset" class="btn btn-danger mt-4"
+                        (click)="deleteTask()">Delete</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <!-- Add Task Form end -->
+</div>
+ -->
+
+<div class="modal-header">
+    <h4 class="modal-title">Task Form</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeTaskModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form id="taskForm" [formGroup]="taskForm">
+        <div class="form-group">
+            <label for="title">Task Title:</label>
+            <input type="text" id="title" name="title" formControlName="title">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Task Description:</label>
+            <textarea id="description" name="description" formControlName="description"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="dueDate">Due Date:</label>
+            <input type="date" id="dueDate" name="dueDate" formControlName="dueDate">
+            <div *ngIf="taskForm.hasError('dateIsBeforeToday')" class="error-message">
+                Please select the Date after Today!
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="priority">Priority:</label>
+            <select id="priority" name="priority" formControlName="priority">
+                <option *ngFor="let option of priorityOptions" [value]="option.value">{{ option.label }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <select id="status" name="status" formControlName="status" [disabled]="true">
+                <option *ngFor="let option of statusOptions" [value]="option.value">{{ option.label }}</option>
+            </select>
+        </div>
+
+
+    </form>
+</div>
+<div class="modal-footer">
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary mt-4" (click)="saveTask(); closeTaskModal()"
+            [disabled]="taskForm.invalid">Save
+            Task</button>
+        <button type="reset" class="btn btn-primary mt-4">Clear</button>
+        <button type="reset" class="btn btn-primary mt-4" (click)="closeTaskModal()">Cancel</button>
+        <button *ngIf="taskId" type="reset" class="btn btn-danger mt-4"
+            (click)="deleteTask(); closeTaskModal()">Delete</button>
+    </div>
 </div>

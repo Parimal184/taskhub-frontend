@@ -33,17 +33,12 @@ export class TaskService {
 
   deleteTask(taskId: number) {
     this.httpService.delete(Constants.DELETE_TASK, taskId).subscribe(() => {
-      this.resetCachedData();
       this.getAllTasks();
     });
   }
 
   getTask(taskId: number): Observable<any> {
     return this.httpService.getWithParam(Constants.GET_TASK, taskId);
-  }
-
-  resetCachedData() {
-    this.cachedDataSubject.next([]);
   }
 
 }

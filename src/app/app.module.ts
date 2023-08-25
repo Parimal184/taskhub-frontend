@@ -14,6 +14,7 @@ import { TaskComponent } from './component/task/task.component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { ModalComponent } from './component/modal/modal.component';
+import { HeaderComponent } from './component/header/header.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ModalComponent } from './component/modal/modal.component';
     HomeComponent,
     TaskComponent,
     SidebarComponent,
-    ModalComponent
+    ModalComponent,
+    HeaderComponent
     ],
   imports: [
     BrowserModule,

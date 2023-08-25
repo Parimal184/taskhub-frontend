@@ -13,7 +13,6 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         let user: UserDetails = JSON.parse(localStorage.getItem('user')!);
-        console.log("from task user:", user)
         if (user && user.token) {
             request = request.clone({
                 setHeaders: {
@@ -21,17 +20,16 @@ export class AuthInterceptor implements HttpInterceptor {
                 }
             });
         }
-        console.log("URL ::", request.url);
+
         let url = request.url;
         if (url.includes('login') || url.includes('signup')) {
             return next.handle(request);
         } else {
             return next.handle(request).pipe(
                 catchError((error: HttpErrorResponse) => {
-                    if (error.status === 401 && error.message.includes("Session expired")) {
-                        this.router.navigate(['/login']);
-                        this.modalService.openErrorModal('Session expired! Please relogin.');
+                    if (error.status === 401) {
                         this.userService.removeLoginUser();
+                        this.router.navigate(['/login']);
                     }
                     return throwError(error);
                 })

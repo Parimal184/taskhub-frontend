@@ -4,6 +4,8 @@
 body {
     font-family: "Poppins", sans-serif;
     font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    height: 100vh;
 }
 
 .container {
@@ -264,4 +266,8 @@ button:hover {
     margin-top: 0.25rem;
     font-size: 0.875em;
     color: var(--bs-form-invalid-color);
+}
+
+.modal-dialog {
+    max-width: 800px !important;
 }

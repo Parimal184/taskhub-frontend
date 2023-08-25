@@ -1,17 +1,13 @@
 <div class="sidebar" *ngIf="showSidebar">
     <div class="container">
         <div class="sidebar">
-            <div class="logo">
-                <a routerLink="/">
-                    <img src="assets/logo.png" alt="TaskHub Logo">
-                    <span class="app-name">TaskHub</span>
-                </a>
-            </div>
+
             <ul>
-                <li [routerLink]="['tasks/', '']" routerLinkActive="active">Tasks</li>
-                <li [routerLink]="['tasks/','todo']" routerLinkActive="active">To Do</li>
-                <li [routerLink]="['tasks/','in-progress']" routerLinkActive="active">In Progress</li>
-                <li [routerLink]="['tasks/','completed']" routerLinkActive="active">Completed</li>
+                <li [routerLink]="['tasks/', '']" routerLinkActive="active"><label>ALL</label></li>
+                <li [routerLink]="['tasks/','planned']" routerLinkActive="active"><label>Planned</label></li>
+                <li [routerLink]="['tasks/','executing']" routerLinkActive="active"><label>Executing</label></li>
+                <li [routerLink]="['tasks/','accomplished']" routerLinkActive="active"><label>Accomplished</label>
+                </li>
             </ul>
         </div>
     </div>

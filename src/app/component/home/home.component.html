@@ -10,7 +10,7 @@
                     <p class="task-count">Total Tasks: 100</p>
                 </div>
                 <div class="task-actions">
-                    <button [routerLink]="['/task/add']">New Task</button>
+                    <button (click)="openTaskModal(0)">New Task</button>
                 </div>
             </div>
             <div class="task-cards">
@@ -20,7 +20,7 @@
                             <i class="fa fa-trash"></i>
                         </button>
                         <p>Task: {{task.id}}</p>
-                        <a [routerLink]="['/task/edit/',task.id]"> {{task.title}} </a>
+                        <a (click)="openTaskModal(task.id)"> {{task.title}} </a>
                         <span><label [ngClass]="getPriorityClass(task)">{{task.priority}}</label></span>
                     </div>
                     <div class="task-metadata">
