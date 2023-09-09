@@ -9,9 +9,9 @@
                     <p class="task-completion">Tasks Completed: 60%</p>
                     <p class="task-count">Total Tasks: 100</p>
                 </div>
-                <div class="task-actions">
+                <!-- <div class="task-actions">
                     <button (click)="openTaskModal(0)">New Task</button>
-                </div>
+                </div> -->
             </div>
             <div class="task-cards">
                 <div class="task-card" *ngFor="let task of taskService.cachedData$ | async">

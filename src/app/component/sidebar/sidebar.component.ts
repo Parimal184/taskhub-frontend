@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ModalService } from 'src/app/services/modal.service';
 import { SidebarService } from 'src/app/services/sidebarService';
 
 @Component({
@@ -9,9 +10,13 @@ import { SidebarService } from 'src/app/services/sidebarService';
 export class SidebarComponent {
   showSidebar!: boolean;
 
-  constructor(private sidebarService: SidebarService) { }
+  constructor(private taskModalService: ModalService,private sidebarService: SidebarService) { }
 
   ngOnInit() {
     this.showSidebar = this.sidebarService.shouldShowSidebar();
+  }
+
+  openTaskModal(taskId: number) {
+    this.taskModalService.openTaskModal(taskId);
   }
 }
