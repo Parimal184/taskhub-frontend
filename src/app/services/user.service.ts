@@ -15,8 +15,12 @@ export class UserService {
     this.loginUser = new BehaviorSubject<UserDetails>(JSON.parse(window.localStorage.getItem('user') || '{}'));
   }
 
-  saveUser(userDetails: UserDetails): Observable<any> {
-    return this.httpService.post(Constants.REGISTER_URL, userDetails);
+  saveUser(userDetails: FormData): Observable<any> {
+    return this.httpService.postMultipart(Constants.REGISTER_URL, userDetails);
+  }
+
+  updateProfilePhoto(formData: FormData): Observable<any> {
+    return this.httpService.postMultipart(Constants.UPLOAD_IMAGE_URL, formData);
   }
 
   login(userDetails: UserDetails) {
@@ -37,6 +41,7 @@ export class UserService {
 
   removeLoginUser() {
     localStorage.removeItem("user");
+    this.loginUser.next(new UserDetails());
   }
 
   getUser() {

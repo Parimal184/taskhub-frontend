@@ -12,9 +12,9 @@ import { HomeComponent } from './component/home/home.component';
 import { AuthInterceptor } from './auth-intercepter';
 import { TaskComponent } from './component/task/task.component';
 import { CommonModule, DatePipe } from '@angular/common';
-import { SidebarComponent } from './component/sidebar/sidebar.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
 import { ModalComponent } from './component/modal/modal.component';
-import { HeaderComponent } from './component/header/header.component';
+import { ProfileComponent } from './component/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -23,9 +23,9 @@ import { HeaderComponent } from './component/header/header.component';
     RegistrationComponent,
     HomeComponent,
     TaskComponent,
-    SidebarComponent,
+    NavbarComponent,
     ModalComponent,
-    HeaderComponent
+    ProfileComponent
     ],
   imports: [
     BrowserModule,

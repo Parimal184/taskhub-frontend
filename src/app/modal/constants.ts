@@ -9,5 +9,6 @@ export const Constants = {
     TASK_SAVE: MAIN_URL + "/task/save",
     ALL_TASKS: MAIN_URL + "/tasks",
     GET_TASK: MAIN_URL + "/task",
-    DELETE_TASK: MAIN_URL + "/delete"
+    DELETE_TASK: MAIN_URL + "/delete",
+    UPLOAD_IMAGE_URL: MAIN_URL + "/image/upload"
 }

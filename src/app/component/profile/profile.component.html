@@ -1,0 +1,18 @@
+<div class="modal-content">
+    <div class="profile-modal-header">
+        <h5 class="modal-title">Profile Image</h5>
+        <div class="close-button" aria-label="Close" (click)="closeTaskModal()">
+            <span aria-hidden="true">&times;</span>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="edit-image">
+            <img [src]=imageURL alt="Profile Image">
+        </div>
+        <div class="form-input">
+            <i class="fa fa-file"></i>
+            <input type="file" class="form-control" (change)="onImageUpload($event)" placeholder="Select image" >
+        </div>
+        <button class="btn btn-light mt-4 signup col-md-12" (click)="updateProfilePhoto()" >Update Image</button>
+    </div>
+</div>

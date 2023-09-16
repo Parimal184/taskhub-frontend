@@ -1,0 +1,36 @@
+.profile-img-modal {
+    width: 500px !important;
+}
+
+.profile-modal-header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--bs-modal-header-padding);
+    border-top-left-radius: var(--bs-modal-inner-border-radius);
+    border-top-right-radius: var(--bs-modal-inner-border-radius);
+    cursor: pointer;
+}
+
+.edit-image {
+    position: relative;
+    width: auto;
+    text-align: center;
+}
+
+.edit-image img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-right: 0px;
+    object-fit: cover;
+}
+
+.file-input i {
+    right: 0;
+}
+
+.form-control input{
+    opacity: 0;
+}

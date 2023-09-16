@@ -2,8 +2,13 @@
     <div class="d-flex align-items-center justify-content-center">
         <div class="col-md-4">
             <div [formGroup]="registerForm" class="card px-5 py-5">
-                <span class="circle"><i class="fa fa-check"></i></span>
-                <h5 class="mt-3">Welcome to TaskHub!</h5><small>To get started, please create an account by filling out
+                <div class="logo">
+                    <a routerLink="/">
+                        <img src="assets/logo.png" alt="TaskHub Logo">
+                        <span class="app-name">TaskHub</span>
+                    </a>
+                </div>
+                <h5 class="mt-4">Welcome to TaskHub!</h5><small>To get started, please create an account by filling out
                     the registration form below.</small>
                 <div class="form-input">
                     <i class="fa fa-envelope"></i>
@@ -66,6 +71,13 @@
                         Password not match!
                     </div>
                 </div>
+                <div class="form-input">
+                    <i class="fa fa-file"></i>
+                    <input type="file" class="form-control" (change)="onImageUpload($event)" placeholder="Select image" >
+                </div>
+                <div class="imagePreview" *ngIf="imageURL && imageURL !== ''">
+                    <img [src]="imageURL" [alt]="selectedFile.name">
+                  </div>
                 <!-- <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
                     <label class="form-check-label" for="flexCheckChecked">

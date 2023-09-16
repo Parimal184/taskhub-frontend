@@ -38,9 +38,14 @@ export class LoginComponent {
           next: (response) => {
             this.userDetails = response.body;
             this.userDetails.token = response.headers.get('Jwt-Token');
+
+            if(!this.userDetails.profileImageUrl) {
+              this.userDetails.profileImageUrl = "../assets/default-profile.jpg"
+            }
+
             localStorage.setItem('user', JSON.stringify(this.userDetails));
             this.userService.setLoginUser(this.userDetails);
-            this.router.navigateByUrl('');
+            window.location.href = '';
           },
           error: (error) => {
             if (error.status === 401) {

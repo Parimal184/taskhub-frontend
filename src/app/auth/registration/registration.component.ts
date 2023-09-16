@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, AbstractControl, ValidatorFn } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserDetails } from 'src/app/modal/user-details';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,6 +13,8 @@ export class RegistrationComponent {
 
   registerForm!: FormGroup;
   isSubmitted: boolean = false;
+  selectedFile!: File;
+  imageURL!: string;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private userSerice: UserService) { }
 
@@ -23,15 +26,22 @@ export class RegistrationComponent {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, this.confirmPassword]]
+      confirmPassword: ['', [Validators.required, this.confirmPassword]],
     }, {
       validators : this.confirmPassword
     });
 
   }
 
-  getData() {
-    console.log("kjhsdgchjgsdh")
+  onImageUpload(event: any) {
+    this.selectedFile = event.target.files[0];
+    console.log("file :", this.selectedFile)
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageURL = reader.result as string;
+    }
+
+    reader.readAsDataURL(this.selectedFile)
   }
 
   confirmPassword(control: AbstractControl) {
@@ -48,10 +58,20 @@ export class RegistrationComponent {
   onSignup() {
     this.isSubmitted = true;
     if(this.registerForm.valid) {
-      console.log("Submitted!!", JSON.stringify(this.registerForm.value));
-      localStorage.setItem("user", JSON.stringify(this.registerForm.value))
-      JSON.parse(localStorage.getItem('user')!);
-      this.userSerice.saveUser(this.registerForm.value).
+      let formDataJson: FormData = new FormData();
+      
+      if(this.selectedFile) {
+        formDataJson.append('profilePhoto', this.selectedFile);
+      }
+
+      let userDetails: any = this.registerForm.value;
+      userDetails.profilePhotoUrl = this.imageURL;
+
+      userDetails = new Blob([JSON.stringify(userDetails)], {
+        type: 'application/json',
+      }); 
+      formDataJson.append('userDetails',userDetails);
+      this.userSerice.saveUser(formDataJson).
         subscribe({
           next: (response) => {
             this.router.navigate(['/login']);

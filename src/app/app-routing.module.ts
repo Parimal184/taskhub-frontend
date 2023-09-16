@@ -5,13 +5,13 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { AuthGuard } from './services/auth.guard';
 import { HomeComponent } from './component/home/home.component';
 import { TaskComponent } from './component/task/task.component';
-import { SidebarComponent } from './component/sidebar/sidebar.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegistrationComponent },
   {
-    path: '', component: SidebarComponent,
+    path: '', component: NavbarComponent,
     children: [
       { path: '', redirectTo: 'tasks/', pathMatch: 'full' },
       { path: 'tasks', redirectTo: 'tasks/', pathMatch: 'full' },

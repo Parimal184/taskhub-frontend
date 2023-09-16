@@ -8,6 +8,11 @@ const httpOptions = {
   })
 };
 
+const httpOptionsMultipart = {
+  headers: new HttpHeaders({
+    'Content-Type': 'multipart/form-data'
+  })
+};
 
 const httpOptionsFullBody = {
   headers: new HttpHeaders({
@@ -25,6 +30,10 @@ export class HttpService {
 
   post(endpoint: string, requestBody: any): Observable<any> {
     return this.http.post(endpoint, requestBody, httpOptions);
+  }
+
+  postMultipart(endpoint: string, requestBody: any): Observable<any> {
+    return this.http.post(endpoint, requestBody);
   }
 
   postBody(endPoint: string, requestPayload: any): Observable<any> {

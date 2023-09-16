@@ -3,6 +3,8 @@ import { HttpService } from './http.service';
 import { TaskData } from '../modal/taskData';
 import { Constants } from '../modal/constants';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { UserService } from './user.service';
+import { UserDetails } from '../modal/user-details';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +13,12 @@ export class TaskService {
 
   private cachedDataSubject = new BehaviorSubject<any[]>([]);
   cachedData$: Observable<any[]> = this.cachedDataSubject.asObservable();
+  loginUser!: any;
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, private userService: UserService) { 
+    this.loginUser = this.userService.getLoginUser();
+    console.log("login in task ::", this.loginUser)
+  }
 
   saveTask(taskData: TaskData): Observable<any> {
     console.log("task data:", taskData)
@@ -20,15 +26,19 @@ export class TaskService {
   }
 
   getAllTasks() {
-    this.httpService.get(Constants.ALL_TASKS + "/all").subscribe(data => {
+    this.httpService.getWithParam(Constants.ALL_TASKS + "/all", this.loginUser.id).subscribe(data => {
       this.cachedDataSubject.next(data.tasks);
     });
   }
 
   getTasksByStatus(status: string) {
-    this.httpService.get(Constants.ALL_TASKS + "/" + status).subscribe(data => {
+    this.httpService.getWithParam(Constants.ALL_TASKS + "/" + status, this.loginUser.id).subscribe(data => {
       this.cachedDataSubject.next(data.tasks);
     });
+  }
+
+  clearCacheSubject() {
+    this.cachedDataSubject.next([]);
   }
 
   deleteTask(taskId: number) {

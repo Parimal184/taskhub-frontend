@@ -12,6 +12,7 @@ body {
     float: left;
     padding: 0%;
     max-width: 100% !important;
+    overflow: hidden;
 }
 
 .height {
@@ -128,6 +129,13 @@ a {
     color: #575e64;
     margin-left: 200px;
     padding: 20px;
+    max-height: 100vh;
+    overflow: auto;
+    margin-top: 55px;
+}
+
+.main-home {
+    width: 100vw !important;
 }
 
 .dashboard {
@@ -172,8 +180,10 @@ a {
     flex: 0 0 calc(25% - 20px);
     margin-left: 10px;
     padding: 15px;
-    border: 1px solid #ddd;
     margin-bottom: 10px;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+    background: #f8f8ffc7;
+    border-radius: 10px;
 }
 
 .task-card h3 {
@@ -184,6 +194,11 @@ a {
 .task-card p {
     margin: 5px 0;
     font-size: small;
+}
+
+.main-sidebar {
+    position: fixed;
+    display: flex;
 }
 
 .task-cards {
@@ -267,6 +282,35 @@ button:hover {
     color: var(--bs-form-invalid-color);
 }
 
-.modal-dialog {
-    max-width: 800px !important;
+.imagePreview img {
+    height: 200px !important;
+}
+
+.logo {
+    align-self: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none !important;
+    cursor: pointer;
+    color: inherit;
+}
+
+.logo img {
+    height: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.app-name {
+    font-size: 20px;
+}
+
+.close-button {
+    background-color: transparent;
+    color: black;
+    border: none;
+    font-size: x-large;
 }
