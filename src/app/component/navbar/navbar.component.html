@@ -1,31 +1,39 @@
 <div class="main-sidebar">
     <div class="header">
+        <div class="menu-icon" (click)="toggleNav()">
+            <a href="javascript:void(0);" class="icon">
+                <i #navIcon class="fa fa-bars"></i>
+            </a>
+        </div>
         <div class="logo">
             <a routerLink="/">
                 <img src="assets/logo.png" alt="TaskHub Logo">
                 <span class="app-name">TaskHub</span>
             </a>
         </div>
-        <div *ngIf="isUserLoggedIn()" class="search-container">
-            <div class="search-icon">
-                <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z">
-                    </path>
-                    <path d="M0,0h24v24H0V0z" fill="none"></path>
-                </svg>
+        <ng-template #searchBar>
+            <div *ngIf="isUserLoggedIn()" class="search-container">
+                <div class="search-icon">
+                    <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z">
+                        </path>
+                        <path d="M0,0h24v24H0V0z" fill="none"></path>
+                    </svg>
+                </div>
+                <input class="search-input" type="text" placeholder="Search...">
             </div>
-            <input class="search-input" type="text" placeholder="Search...">
-        </div>
+        </ng-template>
+        <ng-template [ngTemplateOutlet]="searchBar"></ng-template>
         <div *ngIf="isUserLoggedIn()" class="profile" (click)="toggleProfileOptions()">
-            <img [src]=loginUser.profileImageUrl alt="Profile Image">
+            <img #profileImage [src]=loginUser.profileImageUrl alt="Profile Image">
             <div class="profile-options" [ngClass]="{'open': isProfileOptionsOpen}">
                 <div class="profile-info">
                     <span class="profile-name">{{"Hi, " + loginUser.firstName}}</span>
-                    <div class="profile-image">
+                    <div class="profile-image" (click)="openEditProfileModal()">
                         <img [src]=loginUser.profileImageUrl alt="Profile Image">
-                        <a (click)="openEditProfileModal()" class="edit-img">
+                        <a class="edit-img">
                             <svg width="16" height="16" viewBox="0 0 24 24" focusable="false" class="KkhfNb NMm5M"><path d="M20.41 4.94l-1.35-1.35c-.78-.78-2.05-.78-2.83 0L3 16.82V21h4.18L20.41 7.77c.79-.78.79-2.05 0-2.83zm-14 14.12L5 19v-1.36l9.82-9.82 1.41 1.41-9.82 9.83z"></path></svg>
                         </a>
                     </div>
@@ -38,9 +46,9 @@
             </div>
         </div>
     </div>
-    <div class="sidebar" *ngIf="showSidebar">
+    <div *ngIf="showSidebar">
         <div class="container">
-            <div class="sidebar">
+            <div #mySidebar class="sidebar" [ngClass]="isNavBarOpen ? 'open' : 'close' ">
                 <div class="new-task">
                     <button (click)="openTaskModal(0)">
                         <i role="presentation" class="cUCuw" ssk="6:aP5GMe"></i>
@@ -145,6 +153,9 @@
         </div>
     </div>
     <div class="main-home">
+        <div class="search-container-resp">
+            <ng-template [ngTemplateOutlet]="searchBar"></ng-template>
+        </div>
         <router-outlet></router-outlet>
     </div>
 </div>

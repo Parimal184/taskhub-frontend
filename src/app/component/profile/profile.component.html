@@ -12,7 +12,13 @@
         <div class="form-input">
             <i class="fa fa-file"></i>
             <input type="file" class="form-control" (change)="onImageUpload($event)" placeholder="Select image" >
+            <div class="progress" *ngIf="progress">
+                <div class="progress-bar" [style.width]="progress + '%'">{{progress}}%</div>
+            </div>
         </div>
-        <button class="btn btn-light mt-4 signup col-md-12" (click)="updateProfilePhoto()" >Update Image</button>
+        <div *ngIf="isUploaded">
+            <p>Profile photo successfully updated!</p>
+        </div>
+        <button class="btn btn-secondary signup col-md-12" (click)="updateProfilePhoto()" [disabled]="!isFileUpdated">Update Image</button>
     </div>
 </div>

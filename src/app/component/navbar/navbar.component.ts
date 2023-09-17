@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserDetails } from 'src/app/modal/user-details';
 import { ModalService } from 'src/app/services/modal.service';
@@ -16,6 +16,10 @@ export class NavbarComponent {
   isProfileOptionsOpen = false;
   loginUser!: UserDetails;
   greetings!: string;
+  isNavBarOpen: boolean = false;
+
+  @ViewChild('navIcon') navIconElement!: ElementRef;
+  @ViewChild('profileImage') profileImageElement!: ElementRef;
 
   constructor(private userService: UserService, private router: Router, private elementRef: ElementRef, private taskService: TaskService, private taskModalService: ModalService,private sidebarService: SidebarService) { }
 
@@ -58,16 +62,14 @@ export class NavbarComponent {
     return Object.keys(this.userService.getLoginUser()).length === 0 ? false : true;
   }
 
-  closeProfileOptions() {
-    this.isProfileOptionsOpen = false;
-  }
-
   @HostListener('document:click', ['$event'])
   onClick(event: Event) {
-    const targetElement = event.target as HTMLElement;
-    const clickedInside = this.elementRef.nativeElement.contains(targetElement);
-    if (!clickedInside) {
-      this.closeProfileOptions();
+    if (event.target !== this.navIconElement.nativeElement) {
+      this.isNavBarOpen = false;
+    }
+
+    if(event.target !== this.profileImageElement.nativeElement) {
+      this.isProfileOptionsOpen = false;
     }
   }
 
@@ -75,5 +77,9 @@ export class NavbarComponent {
     this.userService.removeLoginUser();
     this.taskService.clearCacheSubject();
     this.router.navigateByUrl("/login");
+  }
+
+  toggleNav() {
+    this.isNavBarOpen =! this.isNavBarOpen;
   }
 }

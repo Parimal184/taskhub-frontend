@@ -32,6 +32,7 @@ export class UserService {
   }
 
   setLoginUser(user: UserDetails) {
+    localStorage.setItem('user', JSON.stringify(user));
     this.loginUser.next(user);
   }
 

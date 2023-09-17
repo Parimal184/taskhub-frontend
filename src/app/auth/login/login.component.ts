@@ -43,7 +43,6 @@ export class LoginComponent {
               this.userDetails.profileImageUrl = "../assets/default-profile.jpg"
             }
 
-            localStorage.setItem('user', JSON.stringify(this.userDetails));
             this.userService.setLoginUser(this.userDetails);
             window.location.href = '';
           },
