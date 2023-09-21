@@ -25,7 +25,7 @@ import { ProfileComponent } from './component/profile/profile.component';
     TaskComponent,
     NavbarComponent,
     ModalComponent,
-    ProfileComponent
+    ProfileComponent,
     ],
   imports: [
     BrowserModule,

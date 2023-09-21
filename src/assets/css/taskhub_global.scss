@@ -127,11 +127,9 @@ a {
 
 .main-content {
     color: #575e64;
-    margin-left: 200px;
     padding: 20px;
     max-height: 100vh;
     overflow: auto;
-    margin-top: 55px;
 }
 
 .main-home {
@@ -197,7 +195,6 @@ a {
 }
 
 .main-sidebar {
-    position: fixed;
     display: flex;
 }
 
@@ -323,7 +320,6 @@ button:hover {
     width: 200px;
     height: 100vh;
     float: left;
-    position: fixed;
     background-color: #f0f5ff;
     color: #202124;
     overflow: hidden;
@@ -440,7 +436,6 @@ button:hover {
     justify-content: space-between;
     padding: 10px 20px;
     z-index: 1;
-    position: fixed;
     width: 100%;
 }
 
@@ -606,6 +601,8 @@ button:hover {
 @media screen and (max-width: 768px) {
     .sidebar {
         display: none;
+        position: sticky;
+        z-index: 1;
     }
 
     .main-content {
@@ -625,6 +622,10 @@ button:hover {
 
     .menu-icon a {
         color:#6c757da8;
+    }
+
+    .main-home {
+        position: fixed;
     }
 }
 
