@@ -12,120 +12,8 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class HomeComponent {
   taskData = new TaskData();
-  tasks: TaskData[] = [
-    {
-      id: 1,
-      title: "Task 1",
-      description: "Task1 Description !!",
-      status: "IN_PROGRESS",
-      priority: "HIGH",
-      created: "2023-09-22",
-      updated: "2023-09-23",
-      dueDate: "2023-09-30",
-      creatorEmail: "prmltndl@gmail.com"
-    },
-    {
-      id: 1,
-      title: "Task 1",
-      description: "Task1 Description !!",
-      status: "IN_PROGRESS",
-      priority: "HIGH",
-      created: "2023-09-22",
-      updated: "2023-09-23",
-      dueDate: "2023-09-30",
-      creatorEmail: "prmltndl@gmail.com"
-    },
-    {
-      id: 1,
-      title: "Task 1",
-      description: "Task1 Description !!",
-      status: "IN_PROGRESS",
-      priority: "HIGH",
-      created: "2023-09-22",
-      updated: "2023-09-23",
-      dueDate: "2023-09-30",
-      creatorEmail: "prmltndl@gmail.com"
-    },
-    {
-      id: 1,
-      title: "Task 1",
-      description: "Task1 Description !!",
-      status: "IN_PROGRESS",
-      priority: "HIGH",
-      created: "2023-09-22",
-      updated: "2023-09-23",
-      dueDate: "2023-09-30",
-      creatorEmail: "prmltndl@gmail.com"
-    },
-    {
-      id: 1,
-      title: "Task 1",
-      description: "Task1 Description !!",
-      status: "IN_PROGRESS",
-      priority: "HIGH",
-      created: "2023-09-22",
-      updated: "2023-09-23",
-      dueDate: "2023-09-30",
-      creatorEmail: "prmltndl@gmail.com"
-    },
-    {
-      id: 1,
-      title: "Task 1",
-      description: "Task1 Description !!",
-      status: "IN_PROGRESS",
-      priority: "HIGH",
-      created: "2023-09-22",
-      updated: "2023-09-23",
-      dueDate: "2023-09-30",
-      creatorEmail: "prmltndl@gmail.com"
-    },
-    {
-      id: 1,
-      title: "Task 1",
-      description: "Task1 Description !!",
-      status: "IN_PROGRESS",
-      priority: "HIGH",
-      created: "2023-09-22",
-      updated: "2023-09-23",
-      dueDate: "2023-09-30",
-      creatorEmail: "prmltndl@gmail.com"
-    },
-    {
-      id: 1,
-      title: "Task 1",
-      description: "Task1 Description !!",
-      status: "IN_PROGRESS",
-      priority: "HIGH",
-      created: "2023-09-22",
-      updated: "2023-09-23",
-      dueDate: "2023-09-30",
-      creatorEmail: "prmltndl@gmail.com"
-    },
-    {
-      id: 1,
-      title: "Task 1",
-      description: "Task1 Description !!",
-      status: "IN_PROGRESS",
-      priority: "HIGH",
-      created: "2023-09-22",
-      updated: "2023-09-23",
-      dueDate: "2023-09-30",
-      creatorEmail: "prmltndl@gmail.com"
-    },
-    {
-      id: 1,
-      title: "Task 1",
-      description: "Task1 Description !!",
-      status: "IN_PROGRESS",
-      priority: "HIGH",
-      created: "2023-09-22",
-      updated: "2023-09-23",
-      dueDate: "2023-09-30",
-      creatorEmail: "prmltndl@gmail.com"
-    }
-  ];
+  tasks!: TaskData[];
   
-
   constructor(private taskModalService: ModalService, public taskService: TaskService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -143,7 +31,7 @@ export class HomeComponent {
       } else {
         this.getAllTasks();
         this.taskService.cachedData$.subscribe((tasks) => {
-          // this.tasks = tasks;
+          this.tasks = tasks;
         })
       }
     });

@@ -13,18 +13,18 @@
             </div> -->
         </div>
         <div class="task-cards">
-            <div class="task-card" *ngFor="let task of this.tasks">
+            <div class="task-card" *ngFor="let task of this.tasks" (click)="openTaskModal(task.id)">
                 <div class="task-header">
                     <div class="edit-buttons">
-                        <button (click)="deleteTask(task.id)">
+                        <!-- <button (click)="deleteTask(task.id)">
                             <i class="fa fa-edit"></i>
-                        </button>
+                        </button> -->
                         <button (click)="deleteTask(task.id)">
                             <i class="fa fa-trash"></i>
                         </button>
                     </div>
                     <p>Task: {{task.id}}</p>
-                    <a (click)="openTaskModal(task.id)"> {{task.title}} </a>
+                    <a> {{task.title}} </a>
                     <span><label [ngClass]="getPriorityClass(task)">{{task.priority}}</label></span>
                 </div>
                 <div class="task-metadata">
@@ -36,4 +36,5 @@
             <!-- More task cards -->
         </div>
     </div>
+    <hr style="visibility: hidden;">
 </div>

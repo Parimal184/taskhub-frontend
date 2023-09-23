@@ -14,7 +14,7 @@
             </div>
         </div>
         <ng-template #searchBar>
-            <div *ngIf="isUserLoggedIn()" class="search-container">
+            <div *ngIf="true" class="search-container">
                 <div class="search-icon">
                     <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px"
                         xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +28,7 @@
             </div>
         </ng-template>
         <ng-template [ngTemplateOutlet]="searchBar"></ng-template>
-        <div *ngIf="isUserLoggedIn()" class="profile" (click)="toggleProfileOptions()">
+        <div *ngIf="true" class="profile" (click)="toggleProfileOptions()">
             <img #profileImage [src]=loginUser.profileImageUrl alt="Profile Image">
             <div class="profile-options" [ngClass]="{'open': isProfileOptionsOpen}">
                 <div class="profile-info">

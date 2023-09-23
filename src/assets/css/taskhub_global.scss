@@ -3,6 +3,7 @@
 html, body {
     height: 100%;
     padding: 0px;
+    overflow: hidden;
     font-family: "Poppins", sans-serif;
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
@@ -127,6 +128,7 @@ a {
 
 .main-home {
     width: 100vw !important;
+    overflow: auto;
 }
 
 .dashboard {
@@ -175,6 +177,11 @@ a {
     box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
     background: #f0f5ff;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.task-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 7px;
 }
 
 .task-card h3 {
@@ -625,6 +632,7 @@ button:hover {
 
     .main-content {
         margin-left: 0px !important;
+        position: absolute;
     }
 
     .menu-icon {
@@ -643,6 +651,7 @@ button:hover {
 
     .main-home {
         position: absolute;
+        min-height: 100%;
     }
 
     .menu-logo {
