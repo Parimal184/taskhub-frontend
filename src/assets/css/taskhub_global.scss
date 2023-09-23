@@ -1,22 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
 
-
-body {
+html, body {
+    height: 100%;
+    padding: 0px;
     font-family: "Poppins", sans-serif;
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
-    height: 100vh;
-}
-
-.container {
-    float: left;
-    padding: 0%;
-    max-width: 100% !important;
-    overflow: hidden;
-}
-
-.height {
-    height: 100vh;
 }
 
 .card {
@@ -125,11 +114,15 @@ a {
     cursor: pointer;
 }
 
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .main-content {
     color: #575e64;
     padding: 20px;
-    max-height: 100vh;
-    overflow: auto;
 }
 
 .main-home {
@@ -175,12 +168,12 @@ a {
 }
 
 .task-card {
-    flex: 0 0 calc(25% - 20px);
+    flex: 0 0 calc(20% - 10px);
     margin-left: 10px;
     padding: 15px;
     margin-bottom: 10px;
     box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-    background: #f8f8ffc7;
+    background: #f0f5ff;
     border-radius: 10px;
 }
 
@@ -196,6 +189,7 @@ a {
 
 .main-sidebar {
     display: flex;
+    height: 100%;
 }
 
 .task-cards {
@@ -249,14 +243,23 @@ a {
 }
 
 .task-header button {
-    float: right;
+    padding: 0px;
+    margin: 0px;
     background-color: transparent;
-    color: #d73a4a;
+    color: #00000094;
+    font-size: smaller;
 }
 
 .task-header button:hover {
     color: black;
     background-color: transparent;
+}
+
+.edit-buttons {
+    float: right;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
 }
 
 button {
@@ -318,10 +321,10 @@ button:hover {
     display: flex;
     flex-direction: column;
     width: 250px;
-    height: 100vh;
+    height: 100%;
+    float: left;
     background-color: #f0f5ff;
     color: #202124;
-    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-weight: 400;
@@ -601,6 +604,12 @@ button:hover {
 
 /* Responsive Design Start */
 
+@media screen and (max-width: 1024px) {
+    .task-card {
+        flex: 0 0 calc(33% - 10px);
+    }
+}
+
 @media screen and (max-width: 768px) {
     .sidebar {
         /* Move sidebar off-screen */
@@ -608,6 +617,10 @@ button:hover {
         /* Add a transition effect */
         transition: transform 0.3s ease-in-out;
         z-index: 1;
+    }
+
+    .task-card {
+        flex: 0 0 calc(33% - 9px);
     }
 
     .main-content {
@@ -629,19 +642,18 @@ button:hover {
     }
 
     .main-home {
-        position: fixed;
+        position: absolute;
     }
 
     .menu-logo {
         display: flex;
         flex-direction: row;
     }
-
 }
 
 @media screen and (max-width: 540px) {
     .task-card {
-        flex: 0 0 calc(100% - 20px);
+        flex: 0 0 calc(100% - 10px);
     }
 
     .search-container {
@@ -666,5 +678,4 @@ button:hover {
     .profile-options {
         right: -8px;
     }
-
 }

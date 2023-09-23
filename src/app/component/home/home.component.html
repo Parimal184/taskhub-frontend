@@ -1,36 +1,39 @@
-<div class="container">
-    <div class="main-content">
-        <div class="dashboard">
-            <div class="task-summary">
-                <div class="progress-bar-container">
-                    <div class="progress-bar" style="width: 60%;"></div>
-                </div>
-                <div class="task-details">
-                    <p class="task-completion">Tasks Completed: 60%</p>
-                    <p class="task-count">Total Tasks: 100</p>
-                </div>
-                <!-- <div class="task-actions">
-                    <button (click)="openTaskModal(0)">New Task</button>
-                </div> -->
+<div class="main-content">
+    <div class="dashboard">
+        <div class="task-summary">
+            <div class="progress-bar-container">
+                <div class="progress-bar" style="width: 60%;"></div>
             </div>
-            <div class="task-cards">
-                <div class="task-card" *ngFor="let task of taskService.cachedData$ | async">
-                    <div class="task-header">
+            <div class="task-details">
+                <p class="task-completion">Tasks Completed: 60%</p>
+                <p class="task-count">Total Tasks: 100</p>
+            </div>
+            <!-- <div class="task-actions">
+                <button (click)="openTaskModal(0)">New Task</button>
+            </div> -->
+        </div>
+        <div class="task-cards">
+            <div class="task-card" *ngFor="let task of this.tasks">
+                <div class="task-header">
+                    <div class="edit-buttons">
+                        <button (click)="deleteTask(task.id)">
+                            <i class="fa fa-edit"></i>
+                        </button>
                         <button (click)="deleteTask(task.id)">
                             <i class="fa fa-trash"></i>
                         </button>
-                        <p>Task: {{task.id}}</p>
-                        <a (click)="openTaskModal(task.id)"> {{task.title}} </a>
-                        <span><label [ngClass]="getPriorityClass(task)">{{task.priority}}</label></span>
                     </div>
-                    <div class="task-metadata">
-                        <div><span>Created on </span><label><b> {{ task.created | date: 'MMM d, y hh:mm a zzz'
-                                    }}</b></label></div>
-                    </div>
-
+                    <p>Task: {{task.id}}</p>
+                    <a (click)="openTaskModal(task.id)"> {{task.title}} </a>
+                    <span><label [ngClass]="getPriorityClass(task)">{{task.priority}}</label></span>
                 </div>
-                <!-- More task cards -->
+                <div class="task-metadata">
+                    <div><span>Created on </span><label><b> {{ task.created | date: 'MMM d, y hh:mm a zzz'
+                                }}</b></label></div>
+                </div>
+
             </div>
+            <!-- More task cards -->
         </div>
     </div>
 </div>
